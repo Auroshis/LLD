@@ -1,5 +1,13 @@
 """
+ - To limit concurrent access to a shared resource.
+ - To create a global point of access for a resource.
+ - To create just one instance of a class, throughout the lifetime of a program.
 
+ Use cases of a Singleton:
+    Managing a database connection
+    Global point access to writing log messages
+    File Manager
+    Print spooler
 """
 class Logger:
     """Singleton class used for logging"""

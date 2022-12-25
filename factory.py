@@ -1,4 +1,5 @@
 """
+CATEGORY - CREATIONAL
 Factory Method is a Creational Design Pattern that allows an interface or a class to create an object,
 but lets subclasses decide which class or object to instantiate. Using the Factory method, we have the
 best ways to create an object. Here, objects are created without exposing the logic to the client,

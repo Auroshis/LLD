@@ -18,6 +18,20 @@ class User:
         self.__mail = mail
         self.__age = age
 
+    def getName(self):
+        return self.__name
+    
+    def getFriends(self):
+        return self.__friends
+    
+    def setFriend(self, friend):
+        self.__friends.add(friend)
+        return True
+    
+    def removeFriend(self, friend):
+        self.__friends.remove(friend)
+        return True
+
 
 class Payment:
     """
@@ -30,36 +44,39 @@ class Payment:
     def __init__(self, value, currency) -> None:
         self.__value = value
         self.__currency = currency
-
-
-# class SplitStrategy(ABC):
-#     """
-#     Abstract class for creating splits
-#     """
-#     @abstractmethod
-#     def split(self, split_ratios, total):
-#         pass
+    
+    def getValue(self):
+        return self.__value, self.__currency
 
 
 class Expense:
     """Class representing an Expense"""
     __added_by : User
+    __title: str
     __is_settled: bool = False
-    __payment: Payment
+    __total: Payment
     __splits: dict = {}
     __payments: dict = {}
     __image_url: str = ''
+    __strategy:str = 'equal'
 
-    def __init__(self, added_by, payment, currency) -> None:
+    def __init__(self, added_by, payment, currency, title, strategy) -> None:
         self.__added_by = added_by
-        self.__payment = Payment(value=payment, currency=currency)
-        
-class ExpenseSplitter(ABC):
-    """
-    Abstract class for taking user input and splitting into ratios
-    """
-    __ratios: dict = {}
+        self.__total = Payment(value=payment, currency=currency)
+        self.__title = title
+        self.__strategy = strategy
     
-    @abstractmethod
-    def splitPayment(self):
-        pass
+    def setSplits(self, splits):
+        self.__splits = splits
+    
+    def setPayments(self, payments):
+        self.__payments = payments
+    
+    def getPayments(self):
+        return self.__payments
+    
+    def getSplits(self):
+        return self.__splits
+    
+    def getTotal(self):
+        return self.__total.getValue()[0]
